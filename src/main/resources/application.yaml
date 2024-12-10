@@ -5,7 +5,4 @@ spring:
     mongodb:
       repositories:
         type: NONE
-
-logging:
-  level:
-    org.springframework.data.mongodb.core: DEBUG
+      uri:

@@ -34,7 +34,7 @@ dependencies {
 
 }
 
-task buildZip(type: Zip) {
+tasks.register('buildZip', Zip) {
     from compileJava
     from processResources
     into('lib') {
@@ -42,7 +42,10 @@ task buildZip(type: Zip) {
     }
 }
 
-build.dependsOn buildZip
+tasks.register('buildNativeZip', Zip) {
+    from nativeCompile.outputFile
+    from "src/main/shell/bootstrap"
+}
 
 tasks.named('test') {
     useJUnitPlatform()
