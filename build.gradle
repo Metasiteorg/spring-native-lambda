@@ -13,11 +13,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-    implementation 'com.amazonaws.serverless:aws-serverless-java-container-springboot3:2.0.2'
-    implementation 'com.amazonaws:aws-lambda-java-core:1.2.3'
-    implementation 'com.amazonaws:aws-lambda-java-events:3.14.0'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation "org.springframework.boot:spring-boot-testcontainers"
@@ -25,13 +22,18 @@ dependencies {
     testImplementation "org.testcontainers:junit-jupiter"
 
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-    testRuntimeOnly 'org.springframework.boot:spring-boot-starter-tomcat'
-
 
     compileOnly 'org.projectlombok:lombok'
 
     annotationProcessor 'org.projectlombok:lombok'
 
+}
+bootBuildImage {
+    imageName = "027181886236.dkr.ecr.eu-central-1.amazonaws.com/java-aws-native:0.0.1-SNAPSHOT"
+    environment = [
+            'BP_JVM_VERSION': "23",
+            'BPE_APPEND_JAVA_TOOL_OPTIONS': ' -Djava.security.manager=allow'
+    ]
 }
 
 tasks.register('buildZip', Zip) {
