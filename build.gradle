@@ -43,7 +43,7 @@ tasks.register('buildZip', Zip) {
 }
 
 tasks.register('buildNativeZip', Zip) {
-    from nativeCompile.outputFile
+    from nativeCompile
     from "src/main/shell/bootstrap"
 }
 
